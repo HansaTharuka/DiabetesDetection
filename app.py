@@ -36,6 +36,31 @@ def summary():
         "prediction" :json_str[1]
     }
 
+@app.route('/bmi',methods=['POST'])
+def bmi():
+    if request.method == 'POST':
+        weight = float(request.form['weight'])
+        height = float(request.form['height'])
+        BMI = weight / (height / 100) ** 2
+
+    if BMI <= 18.4:
+        detail="You are underweight."
+    elif BMI <= 24.9:
+        detail="You are healthy."
+    elif BMI <= 29.9:
+        detail="You are over weight."
+    elif BMI <= 34.9:
+        detail="You are severely over weight."
+    elif BMI <= 39.9:
+        detail="You are obese."
+    else:
+        detail="You are severely obese."
+
+    return {
+        "bmi" :BMI,
+        "detail":detail
+    }
+
 @app.route('/predict', methods=['POST'])
 def predict():
     if request.method == 'POST':

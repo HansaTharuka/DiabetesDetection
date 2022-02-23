@@ -4,7 +4,7 @@ import pandas as pd
 import pickle
 
 # Loading the dataset
-df = pd.read_csv('kaggle_diabetes.csv')
+df = pd.read_csv('diabetes.csv')
 
 # Renaming DiabetesPedigreeFunction as DPF
 df = df.rename(columns={'DiabetesPedigreeFunction':'DPF'})
