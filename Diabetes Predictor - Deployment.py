@@ -31,6 +31,10 @@ from sklearn.ensemble import RandomForestClassifier
 classifier = RandomForestClassifier(n_estimators=20)
 classifier.fit(X_train, y_train)
 
+# from sklearn.neighbors import KNeighborsClassifier
+# knn = KNeighborsClassifier(n_neighbors = 24, metric = 'minkowski', p = 2)
+# knn.fit(X_train, y_train)
+
 # Creating a pickle file for the classifier
 filename = 'model.pkl'
 pickle.dump(classifier, open(filename, 'wb'))

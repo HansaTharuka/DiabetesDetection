@@ -26,6 +26,22 @@ def summary():
         dpf = float(request.form['dpf'])
         age = int(request.form['age'])
 
+        weight = float(request.form['weight'])
+        height = float(request.form['height'])
+        BMI = weight / (height / 100) ** 2
+        if BMI <= 18.4:
+            detail = "You are underweight."
+        elif BMI <= 24.9:
+            detail = "You have good BMI."
+        elif BMI <= 29.9:
+            detail = "You are over weight."
+        elif BMI <= 34.9:
+            detail = "You are severely over weight."
+        elif BMI <= 39.9:
+            detail = "You are obese."
+        else:
+            detail = "You are severely obese."
+
         data = np.array([[preg, glucose, bp, st, insulin, bmi, dpf, age]])
         my_prediction = classifier.predict(data)
         lists = my_prediction.tolist()
@@ -33,7 +49,9 @@ def summary():
         print(type(json_str))
 
     return {
-        "prediction" :json_str[1]
+        "prediction" :json_str[1],
+        "bmi": BMI,
+        "detail": detail
     }
 
 @app.route('/bmi',methods=['POST'])
