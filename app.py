@@ -5,7 +5,7 @@ import numpy as np
 import pandas as pd
 
 # Load the Random Forest CLassifier model
-filename = 'model.pkl'
+filename = 'model2.pkl'
 classifier = pickle.load(open(filename, 'rb'))
 
 app = Flask(__name__)
@@ -42,7 +42,7 @@ def summary():
         else:
             detail = "You are severely obese."
 
-        data = np.array([[preg, glucose, bp, st, insulin, bmi, dpf, age]])
+        data = np.array([[preg, glucose, bp, st, insulin, BMI, dpf, age]])
         my_prediction = classifier.predict(data)
         lists = my_prediction.tolist()
         json_str = json.dumps(lists)
