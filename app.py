@@ -40,24 +40,27 @@ def summary():
         elif BMI <= 39.9:
             detail = 2
         else:
-            detail = "You are severely obese."
+            detail = 2
 
         data = np.array([[preg, glucose, bp, st, insulin, BMI, dpf, age]])
         my_prediction = classifier.predict(data)
         lists = my_prediction.tolist()
         json_str = json.dumps(lists)
-        print(type(json_str))
-
-        if detail == 1 and json_str[1] == 0:
-            plan = 4
-        elif detail == 1 and json_str[1] == 1:
-            plan = 3
-        elif detail == 0:
+        output= json_str[1]
+        print(detail)
+        print(output)
+        if detail == 1:
+            if output == 0:
+                plan = 4
+            else:
+                plan = 3
+        elif detail == 2:
+            if output == 0:
+                plan = 2
+            else:
+                plan = 1
+        else:
             plan = 0
-        elif detail == 2 and json_str[1] == 0:
-            plan = 3
-        elif detail == 2 and json_str[1] == 1:
-            plan = 1
 
 
     return {
