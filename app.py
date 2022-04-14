@@ -22,7 +22,7 @@ def summary():
         bp = int(request.form['bloodpressure'])
         st = int(request.form['skinthickness'])
         insulin = int(request.form['insulin'])
-        bmi = float(request.form['bmi'])
+        # bmi = float(request.form['bmi'])
         dpf = float(request.form['dpf'])
         age = int(request.form['age'])
 
