@@ -30,15 +30,15 @@ def summary():
         height = float(request.form['height'])
         BMI = weight / (height / 100) ** 2
         if BMI <= 18.4:
-            detail = "You are underweight."
+            detail = 1
         elif BMI <= 24.9:
-            detail = "You have good BMI."
+            detail = 0
         elif BMI <= 29.9:
-            detail = "You are over weight."
+            detail = 2
         elif BMI <= 34.9:
-            detail = "You are severely over weight."
+            detail = 2
         elif BMI <= 39.9:
-            detail = "You are obese."
+            detail = 2
         else:
             detail = "You are severely obese."
 
@@ -48,10 +48,22 @@ def summary():
         json_str = json.dumps(lists)
         print(type(json_str))
 
+        if detail == 1 and json_str[1] == 0:
+            plan = 4
+        elif detail == 1 and json_str[1] == 1:
+            plan = 3
+        elif detail == 0:
+            plan = 0
+        elif detail == 2 and json_str[1] == 0:
+            plan = 3
+        elif detail == 2 and json_str[1] == 1:
+            plan = 1
+
+
     return {
         "prediction" :json_str[1],
         "bmi": BMI,
-        "detail": detail
+        "plan": plan
     }
 
 @app.route('/bmi',methods=['POST'])
