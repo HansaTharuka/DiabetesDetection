@@ -3,18 +3,23 @@ from flask import Flask,json,render_template, request
 import pickle
 import numpy as np
 import pandas as pd
+from flask_cors import CORS, cross_origin
+from flask import Flask, jsonify
 
 # Load the Random Forest CLassifier model
 filename = 'model2.pkl'
 classifier = pickle.load(open(filename, 'rb'))
 
 app = Flask(__name__)
+CORS(app, support_credentials=True)
 
 @app.route('/')
 def home():
 	return render_template('index.html')
 
+
 @app.route('/summary',methods=['POST'])
+@cross_origin(supports_credentials=True)
 def summary():
     if request.method == 'POST':
         preg = int(request.form['pregnancies'])
@@ -63,11 +68,7 @@ def summary():
             plan = 0
 
 
-    return {
-        "prediction" :json_str[1],
-        "bmi": BMI,
-        "plan": plan
-    }
+    return jsonify({"prediction" :json_str[1],"bmi": BMI,"plan": plan})
 
 @app.route('/bmi',methods=['POST'])
 def bmi():
