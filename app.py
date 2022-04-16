@@ -10,7 +10,7 @@ filename = 'model2.pkl'
 classifier = pickle.load(open(filename, 'rb'))
 
 app = Flask(__name__)
-CORS(app)
+# CORS(app)
 
 @app.route('/')
 def home():
