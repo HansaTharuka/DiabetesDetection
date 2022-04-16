@@ -66,7 +66,7 @@ def summary():
 
 
     return {
-        "prediction" :json_str[1],
+        "prediction" :int(json_str[1]),
         "bmi": BMI,
         "plan": plan
     }
