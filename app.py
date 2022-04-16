@@ -3,12 +3,14 @@ from flask import Flask,json,render_template, request
 import pickle
 import numpy as np
 import pandas as pd
+from flask_cors import CORS
 
 # Load the Random Forest CLassifier model
 filename = 'model2.pkl'
 classifier = pickle.load(open(filename, 'rb'))
 
 app = Flask(__name__)
+CORS(app)
 
 @app.route('/')
 def home():
